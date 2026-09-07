@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/calculator/__init__.py
+src/calculator/calculator.py
+src/python_calculator.egg-info/PKG-INFO
+src/python_calculator.egg-info/SOURCES.txt
+src/python_calculator.egg-info/dependency_links.txt
+src/python_calculator.egg-info/entry_points.txt
+src/python_calculator.egg-info/requires.txt
+src/python_calculator.egg-info/top_level.txt
+src/test_report/__init__.py
+src/test_report/cli.py
+src/test_report/parser.py
+src/test_report/summary.py
+tests/test_calculator.py
+tests/test_report_parser.py

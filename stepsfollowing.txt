@@ -1,0 +1,46 @@
+#Create the virtual environment
+#Windows PowerShell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
+#Then upgrade pip:
+python -m pip install --upgrade pip
+
+#Install Ruff and pytest inside the virtual environment:
+python -m pip install pytest ruff
+
+#Create pyproject.toml:
+
+#The selected Ruff rules cover common style errors, unused imports, import sorting, Python modernization, and likely bugs.
+ruff format .
+ruff check .
+pytest
+#A useful combined command is:
+ruff format . && ruff check . && pytest
+#===============================================
+#Step 1: Install the JSON report plugin
+#Inside your activated virtual environment:
+python -m pip install pytest-json-report
+#Generate a report:
+pytest --json-report --json-report-file=sample_data/pytest-report.json
+#To make the JSON easier to inspect:
+pytest \
+  --json-report \
+  --json-report-file=sample_data/pytest-report.json \
+  --json-report-indent=2
+#On Windows PowerShell, use the command on one line:
+pytest --json-report --json-report-file=sample_data/pytest-report.json --json-report-indent=2
+#Step 2: Create the parser
+#New-Item -Path "src/test_report/parser.py" -ItemType File -Force
+
+#Run all tests:
+pytest
+#Then run formatting and linting:
+ruff format .
+ruff check .
+
+#Step 6: Add a reusable command
+#Then install the project in editable mode:
+python -m pip install -e .
+#Now you can run: This is more professional than always running a Python file by path.
+parse-test-report sample_data/pytest-report.json
