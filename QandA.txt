@@ -1,0 +1,108 @@
+#How can I Generate a JSON report from pytest?
+#Generate a JSON pytest report
+#From the project root, run:
+pytest --json-report --json-report-file=sample_data/pytest-report.json
+#You can also make the JSON easier to read:
+pytest --json-report --json-report-file=sample_data/pytest-report.json --json-report-indent=2
+python src/test_report/cli.py sample_data/pytest-report.json
+python src/test_report/cli.py sample_data/pytest-report.json
+
+
+#How can I Load and validate a JSON file.?
+pytest --json-report --json-report-file=sample_data/pytest-report.json
+
+#How to Count passed, failed, and skipped tests.?
+python src/test_report/cli.py sample_data/pytest-report.json
+
+#How do I Calculate a pass rate.?
+D:\Development Projects\source\projects\calculator-python\src\test_report\summary.py
+executed_tests = counts["passed"] + counts["failed"]
+
+if executed_tests == 0:
+    return 0.0
+
+return round((counts["passed"] / executed_tests) * 100, 2)
+
+#How can I Identify failed test names.?
+python src/test_report/cli.py sample_data/pytest-report.json
+
+#How can I find Display execution duration.?
+python src/test_report/cli.py sample_data/pytest-report.json
+Test Report Summary
+===================
+Total tests    : 24
+Passed         : 22
+Failed         : 2
+Skipped        : 0
+Pass rate      : 91.67%
+Duration       : 0.17 seconds
+
+Failed tests:
+  - tests/test_calculator.py::test_add_returns_sum_of_two_numbers
+  - tests/test_calculator.py::test_divide
+
+#How can you Handle invalid input safely.?
+Safe handling of invalid input in this project
+This project handles invalid input in the parser layer, mainly in parser.py and the summary logic in summary.py.
+Common pattern used
+The code checks:
+
+file exists
+JSON can be loaded
+expected fields exist
+field types are correct
+Why this is safe
+It prevents:
+
+crashes from missing files
+invalid JSON parsing errors
+wrong data structure
+missing required keys
+
+#How to Test the parser with pytest.?
+pytest tests/test_report_parser.py
+or
+pytest
+Example test pattern
+The parser tests typically verify:
+
+valid JSON file loads correctly
+invalid file path raises an error
+invalid JSON raises a validation error
+missing required fields raise a ValueError
+
+pytest -q
+
+#Format and lint the implementation with Ruff.
+ruff format .
+ruff check .
+Combined command: ruff format . && ruff check .
+This reformats Python files to a consistent style.
+This checks for common issues like:
+
+unused imports
+style problems
+code smells
+possible bugs
+Run from project root:
+cd D:\Development Projects\source\projects\calculator-python
+ruff format .
+ruff check .
+
+#How to use Execute the parser from the command line.?
+Command
+parse-test-report sample_data/pytest-report.json
+#This works after installing the project in editable mode:
+python -m pip install -e .
+#Direct Python execution
+#If you want to run it without the installed script:
+python src/test_report/cli.py sample_data/pytest-report.json
+#Example output
+Test Report Summary
+===================
+Total tests    : 24
+Passed         : 22
+Failed         : 2
+Skipped        : 0
+Pass rate      : 91.67%
+Duration       : 0.17 seconds

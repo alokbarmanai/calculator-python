@@ -2,3 +2,10 @@ ni test_run_command -ItemType File
 Powershell Commands: 
 $env:PYTHONPATH = "src"
 python -m pytest -v
+
+#Test run commands:
+pytest
+pytest tests
+#Just 1 file to run:
+pytest tests/test_report_parser.py
+python src/test_report/history_cli.py sample_data/history.json

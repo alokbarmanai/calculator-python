@@ -8,17 +8,23 @@ from test_report.summary import build_summary
 def print_summary(summary: dict) -> None:
     print("Test Report Summary")
     print("===================")
-    print(f"Total tests:       {summary['total']}")
-    print(f"Passed:            {summary['passed']}")
-    print(f"Failed:            {summary['failed']}")
-    print(f"Skipped:           {summary['skipped']}")
-    print(f"Pass rate:         {summary['pass_rate']}%")
-    print(f"Duration:          {summary['duration_seconds']:.2f} seconds")
+
+    rows = [
+        ("Total tests", str(summary["total"])),
+        ("Passed", str(summary["passed"])),
+        ("Failed", str(summary["failed"])),
+        ("Skipped", str(summary["skipped"])),
+        ("Pass rate", f"{summary['pass_rate']:.2f}%"),
+        ("Duration", f"{summary['duration_seconds']:.2f} seconds"),
+    ]
+
+    for label, value in rows:
+        print(f"{label:<14} : {value}")
 
     if summary["failed_tests"]:
         print("\nFailed tests:")
         for test_name in summary["failed_tests"]:
-            print(f"- {test_name}")
+            print(f"  - {test_name}")
 
 
 def main() -> None:

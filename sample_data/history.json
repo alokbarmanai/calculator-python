@@ -1,0 +1,62 @@
+[
+    {
+        "run_id": "run-1",
+        "tests": [
+            {
+                "nodeid": "tests/test_operations.py::test_add",
+                "outcome": "passed",
+                "duration": 0.02
+            },
+            {
+                "nodeid": "tests/test_operations.py::test_divide",
+                "outcome": "passed",
+                "duration": 0.03
+            },
+            {
+                "nodeid": "tests/test_operations.py::test_subtract",
+                "outcome": "passed",
+                "duration": 0.01
+            }
+        ]
+    },
+    {
+        "run_id": "run-2",
+        "tests": [
+            {
+                "nodeid": "tests/test_operations.py::test_add",
+                "outcome": "passed",
+                "duration": 0.02
+            },
+            {
+                "nodeid": "tests/test_operations.py::test_divide",
+                "outcome": "failed",
+                "duration": 0.04
+            },
+            {
+                "nodeid": "tests/test_operations.py::test_subtract",
+                "outcome": "passed",
+                "duration": 0.01
+            }
+        ]
+    },
+    {
+        "run_id": "run-3",
+        "tests": [
+            {
+                "nodeid": "tests/test_operations.py::test_add",
+                "outcome": "passed",
+                "duration": 0.02
+            },
+            {
+                "nodeid": "tests/test_operations.py::test_divide",
+                "outcome": "passed",
+                "duration": 0.03
+            },
+            {
+                "nodeid": "tests/test_operations.py::test_subtract",
+                "outcome": "passed",
+                "duration": 0.01
+            }
+        ]
+    }
+]
