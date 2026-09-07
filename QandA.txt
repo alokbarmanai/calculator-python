@@ -106,3 +106,12 @@ Failed         : 2
 Skipped        : 0
 Pass rate      : 91.67%
 Duration       : 0.17 seconds
+#The files have separate responsibilities:
+| File              | Responsibility                    |
+| ----------------- | --------------------------------- |
+| exceptions.py     | Custom application errors         |
+| logging_config.py | Logging configuration             |
+| parser.py         | Load and validate one JSON report |
+| history.py        | Analyze multiple test runs        |
+| history_cli.py    | Command-line interface            |
+

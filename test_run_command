@@ -9,3 +9,5 @@ pytest tests
 #Just 1 file to run:
 pytest tests/test_report_parser.py
 python src/test_report/history_cli.py sample_data/history.json
+python src/test_report/history_cli.py sample_data/history.json
+

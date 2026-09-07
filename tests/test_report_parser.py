@@ -2,6 +2,10 @@ import json
 
 import pytest
 
+from test_report.exceptions import (
+    InvalidReportError,
+    ReportFileNotFoundError,
+)
 from test_report.parser import load_report
 from test_report.summary import (
     build_summary,
@@ -27,7 +31,7 @@ def test_load_report(tmp_path):
 def test_load_report_raises_for_missing_file(tmp_path):
     report_path = tmp_path / "missing.json"
 
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(ReportFileNotFoundError):
         load_report(report_path)
 
 
@@ -35,7 +39,7 @@ def test_load_report_raises_for_invalid_json(tmp_path):
     report_path = tmp_path / "invalid.json"
     report_path.write_text("{invalid json", encoding="utf-8")
 
-    with pytest.raises(ValueError, match="Invalid JSON"):
+    with pytest.raises(InvalidReportError, match="Invalid JSON report"):
         load_report(report_path)
 
 

@@ -6,7 +6,7 @@ from calculator.calculator import add, divide, multiply, subtract
 
 
 def test_add_returns_sum_of_two_numbers():
-    assert add(10, 5) == 16
+    assert add(10, 5) == 15
 
 
 def test_add_handles_negative_numbers():
@@ -63,7 +63,7 @@ def test_multiply():
 
 
 def test_divide():
-    assert divide(10, 2) == 6
+    assert divide(10, 2) == 5
 
 
 def test_divide_by_zero():

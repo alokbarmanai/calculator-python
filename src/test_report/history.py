@@ -1,25 +1,79 @@
 import json
+import logging
 from pathlib import Path
 from typing import Any
 
+from test_report.exceptions import InvalidHistoryError
+
+logger = logging.getLogger(__name__)
+
 
 def load_history(history_path: str | Path) -> list[dict[str, Any]]:
-    """Load multiple test runs from a JSON file."""
+    """Load and validate multiple test runs from a JSON file."""
     path = Path(history_path)
 
+    logger.info("Loading test history: %s", path)
+
     if not path.exists():
-        raise FileNotFoundError(f"History file not found: {path}")
+        logger.error("History file does not exist: %s", path)
+        raise InvalidHistoryError(f"History file not found: {path}")
 
     try:
         with path.open("r", encoding="utf-8") as history_file:
             history = json.load(history_file)
     except json.JSONDecodeError as error:
-        raise ValueError(f"Invalid JSON history file: {path}") from error
+        logger.exception("History contains invalid JSON: %s", path)
+        raise InvalidHistoryError(f"Invalid JSON history file: {path}") from error
 
-    if not isinstance(history, list):
-        raise ValueError("The history file must contain a list of test runs")
+    validate_history(history, path)
+
+    logger.info(
+        "Loaded test history: %s runs=%d",
+        path,
+        len(history),
+    )
 
     return history
+
+
+def validate_history(
+    history: Any,
+    history_path: str | Path = "<memory>",
+) -> None:
+    """Validate the structure of historical test results."""
+    if not isinstance(history, list):
+        raise InvalidHistoryError(f"History must contain a list: {history_path}")
+
+    for run_index, run in enumerate(history):
+        if not isinstance(run, dict):
+            raise InvalidHistoryError(f"Run at index {run_index} must be an object")
+
+        tests = run.get("tests")
+
+        if not isinstance(tests, list):
+            raise InvalidHistoryError(
+                f"Run at index {run_index} must contain a tests list"
+            )
+
+        for test_index, test in enumerate(tests):
+            if not isinstance(test, dict):
+                raise InvalidHistoryError(
+                    f"Test at index {test_index} must be an object"
+                )
+
+            if not test.get("nodeid"):
+                raise InvalidHistoryError(
+                    f"Test at index {test_index} is missing nodeid"
+                )
+
+            if test.get("outcome") not in {
+                "passed",
+                "failed",
+                "skipped",
+            }:
+                raise InvalidHistoryError(
+                    f"Test at index {test_index} has invalid outcome"
+                )
 
 
 def collect_test_results(
