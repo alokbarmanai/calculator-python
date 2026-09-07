@@ -11,3 +11,11 @@ pytest tests/test_report_parser.py
 python src/test_report/history_cli.py sample_data/history.json
 python src/test_report/history_cli.py sample_data/history.json
 
+#Step 1: Review existing tests
+#From PowerShell: cd "D:\Development Projects\source\projects\calculator-python"
+#Run all tests: pytest
+#Run with more detail: pytest -v
+#Run with coverage-style test output: pytest -v --tb=short
+#The -v option displays each test name, and --tb=short provides shorter failure tracebacks.
+#Use this final combined command:
+ruff format .; if ($LASTEXITCODE -eq 0) { ruff check . }; if ($LASTEXITCODE -eq 0) { pytest -v }
