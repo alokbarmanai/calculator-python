@@ -1,0 +1,4 @@
+ni test_run_command -ItemType File 
+Powershell Commands: 
+$env:PYTHONPATH = "src"
+python -m pytest -v

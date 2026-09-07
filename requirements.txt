@@ -1,0 +1,19 @@
+#Create the virtual environment
+#Windows PowerShell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
+#Then upgrade pip:
+python -m pip install --upgrade pip
+
+#Install Ruff and pytest inside the virtual environment:
+python -m pip install pytest ruff
+
+#Create pyproject.toml:
+
+#The selected Ruff rules cover common style errors, unused imports, import sorting, Python modernization, and likely bugs.
+ruff format .
+ruff check .
+pytest
+#A useful combined command is:
+ruff format . && ruff check . && pytest
